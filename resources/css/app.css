@@ -1,7 +1,78 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 [x-cloak] {
     display: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ************************************ESTILOS LAYOUT APP.BLADE.PHP******************************************** */
+
+/* estilos primer nav */
+.tituloServicio p {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+/* estilos segundo nav */
+.navbar {
+    padding: 20px; /* Ajusta el padding según sea necesario */
+}
+
+.navbar .fa-shopping-cart {
+    color: #000; /* Color negro */
+    font-size: 1.2rem; /* Tamaño del icono */
+    position: relative; /* Para alinear el número */
+}
+
+.navbar .fa-shopping-cart::after {
+    content: '3'; /* Número de elementos en el carrito */
+    position: absolute;
+    top: -8px; /* Ajusta la posición vertical */
+    right: -8px; /* Ajusta la posición horizontal */
+    background-color: red; /* Color de fondo del número */
+    color: white; /* Color del texto del número */
+    font-size: 0.8rem; /* Tamaño del texto del número */
+    width: 18px; /* Ancho del número */
+    height: 18px; /* Alto del número */
+    border-radius: 50%; /* Forma del borde del número (círculo) */
+    text-align: center; /* Alineación del texto en el número */
+    line-height: 18px; /* Altura de línea del número */
+}
+
+/* Estilos para el footer */
+.footer {
+    background-color: #fff; 
+    color: #000; 
+    padding: 10px 0; 
+    position: absolute; 
+    width: 100%;
+    bottom: 0; 
+    border-top: 1px solid rgba(128, 128, 128, 0.359);
+}
+
+/* Estilos para los iconos sociales en el footer */
+.social-icons a {
+    color: #000; /* Color blanco para los iconos */
+    font-size: 24px; /* Tamaño de los iconos */
+    margin-right: 5px; /* Espaciado entre los iconos */
+}
+
+/* Estilos para los enlaces de contacto en el footer */
+.contact-info p {
+    margin-bottom: 5px; /* Espacio entre los párrafos */
+}
+
+/* Estilos para el texto de dirección en el footer */
+.contact-info p:last-child {
+    margin-top: 5px; /* Espacio arriba del último párrafo */
+}
+
+/* ************************************ESTILOS VISTA WELLCOME******************************************** */
+.container-inicio h1{
+    margin: 20px;
+    text-align: center;
 }
