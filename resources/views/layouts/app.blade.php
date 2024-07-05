@@ -26,7 +26,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand logo-nav" href="#">
-                    <img src="img/logo-ebenezer.png" alt="Logo Ebenezer" width="150" height="auto" class="d-inline-block align-text-top">
+                    <img src="{{ asset('img/logo-ebenezer.png')}} " alt="Logo Ebenezer" width="150" height="auto" class="d-inline-block align-text-top">
                 </a>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="¿Qué estás buscando?" aria-label="Search" id="input-buscar" name="input-buscar">
@@ -72,16 +72,16 @@
                 <div class="collapse navbar-collapse" id="navbarScroll">
                     <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Tienda</a>
+                            <a class="nav-link" href="{{ route('tienda') }}">Tienda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Nosotros</a>
+                            <a class="nav-link" href="{{ route('nosotros') }}">Nosotros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contáctenos</a>
+                            <a class="nav-link" href="{{ route('contactenos') }}">Contáctenos</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -97,7 +97,7 @@
                         </li>
                         @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Gestionar Productos</a>
+                            <a class="nav-link" href="{{ route('gestionProductos.index') }} ">Gestionar Productos</a>
                         </li>
                         @endauth
                     </ul>
@@ -127,7 +127,7 @@
                             <i class="fas fa-map-marker-alt"></i> Montería: Diagonal 12 #4-24 B/La Granja |
                         </p>
                     </div>
-                    <p>&copy; Copyright 2023 LEYED All rights reserved. Nueve Seis Dos SAS | 1067888598-8</p>
+                    <p>&copy; Copyright 2024 Ebenezer-Store All rights reserved. Nueve Seis Dos SAS | 1067888598-8</p>
                 </div>
             </div>
         </div>
