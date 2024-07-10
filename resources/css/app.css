@@ -43,10 +43,9 @@
     background-color: #fff; 
     color: #000; 
     padding: 10px 0; 
-    position: absolute; 
     width: 100%;
-    bottom: 0; 
     border-top: 1px solid rgba(128, 128, 128, 0.359);
+    position: relative;
 }
 
 /* Estilos para los iconos sociales en el footer */
@@ -71,3 +70,14 @@
     margin: 20px;
     text-align: center;
 }
+
+/* *************************ESTILOS DE LA VISTA PRODUCTOS************ */
+.fixed-size-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+
+
+
