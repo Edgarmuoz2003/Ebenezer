@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 use PhpParser\Node\Stmt\TryCatch;
 
@@ -79,16 +80,62 @@ class ProductosController extends Controller
     public function edit(string $id)
     {
         $producto = Producto::findOrFail($id);
-        return view('productos.edit', compact('producto'));
+        return view('editarProducto', compact('producto'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'titulo' => 'required|string|max:50',
+        'precio' => 'required|integer',
+        'descripcion' => 'required|string',
+        'categoria' => 'required|string',
+        'tallas_disponibles' => 'required|array',
+    ]);
+
+    try {
+        $producto = Producto::findOrFail($id);
+
+        // Actualizar los campos del producto
+        $producto->titulo = $request->input('titulo');
+        $producto->precio = $request->input('precio');
+        $producto->descripcion = $request->input('descripcion');
+        $producto->categoria = $request->input('categoria');
+
+        // Manejar las tallas disponibles
+        $tallas_disponibles = $request->input('tallas_disponibles');
+        $producto->tallas_disponibles = $tallas_disponibles ?? [];
+
+        // Manejar la imagen si se proporciona
+        if ($request->hasFile('imagen')) {
+            // Eliminar la imagen anterior si existe
+            if ($producto->imagen) {
+                Storage::delete($producto->imagen);
+            }
+
+            // Almacenar la nueva imagen y guardar la ruta en la base de datos
+            $imagenPath = $request->file('imagen')->store('public/img');
+            $producto->imagen = $imagenPath;
+        }
+
+        // Guardar el producto actualizado
+        $producto->save();
+
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('gestionProductos.index')->with('updateSuccess', 'Producto actualizado correctamente');
+    } catch (\Throwable $th) {
+        Log::error("Error al intentar actualizar el producto: " . $th->getMessage());
+
+        return redirect()->back()
+            ->withInput()
+            ->with('updateError', 'Ha ocurrido un error al actualizar el producto. Por favor, intenta nuevamente.');
     }
+}
+
+
 
     /**
      * Remove the specified resource from storage.

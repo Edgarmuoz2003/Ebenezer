@@ -3,11 +3,11 @@
 @section('titulo', 'Ebenezer-Store')
 
 @section('content')
-    <h1 class="text-center">Gestión de Productos</h1>
+    <h1 class="text-center pt-2">Gestión de Productos</h1>
     <div class="container">
         <!-- Button trigger modal -->
         <div class="d-flex justify-content-end mt-3">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Añadir Producto
             </button>
         </div>
@@ -15,17 +15,19 @@
         <div class="container mt-4">
             <div class="row">
                 @foreach ($productos as $producto)
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <div class="card h-100">
-                            <img src="{{ Storage::url($producto->imagen) }}" class="card-img-top img-fluid fixed-size-img" alt="{{ $producto->titulo }}">
+                             <img src="{{ Storage::url($producto->imagen) }}" class="card-img-top img-fluid imagen-producto"
+                                alt="{{ $producto->titulo }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $producto->titulo }}</h5>
                                 <p class="card-text">${{ number_format($producto->precio, 0, ',', '.') }}</p>
 
                                 <div class="d-flex justify-content-between">
                                     <!-- Botón Editar -->
-                                    <a href="{{ route('gestionProductos.edit', $producto->id) }}" class="btn btn-primary btn-sm">Editar</a>
-        
+                                    <a href="{{ route('gestionProductos.edit', $producto->id) }}"
+                                        class="btn btn-primary btn-sm">Editar</a>
+
                                     <!-- Botón Eliminar -->
                                     <form action="{{ route('gestionProductos.destroy', $producto->id) }}" method="POST">
                                         @csrf
@@ -57,7 +59,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="imagen" class="form-label">Cargar Imagen</label>
-                                <input type="file" name="imagen" class="form-control" id="imagen-producto" accept="image/*">
+                                <input type="file" name="imagen" class="form-control" id="imagen-producto"
+                                    accept="image/*">
                             </div>
                             <div class="mb-3">
                                 <label for="precio" class="form-label">Precio</label>
@@ -69,7 +72,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="categoria" class="form-label">Categoria</label>
-                                <select name="categoria" id="categoria" class="form-select" aria-label="Default select example">
+                                <select name="categoria" id="categoria" class="form-select"
+                                    aria-label="Default select example">
                                     <option selected>Pijamas</option>
                                     <option value="Camisetas">Camisetas</option>
                                     <option value="Blusas">Blusas</option>
@@ -82,37 +86,42 @@
                                 <div class="row">
                                     <div class="col-6 col-sm-4 col-md-2">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="tallas_disponibles[]" id="tallaXS" value="XS">
+                                            <input type="checkbox" class="form-check-input" name="tallas_disponibles[]"
+                                                id="tallaXS" value="XS">
                                             <label class="form-check-label" for="tallaXS">XS</label>
                                         </div>
                                     </div>
                                     <div class="col-6 col-sm-4 col-md-2">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="tallas_disponibles[]" id="tallaS" value="S">
+                                            <input type="checkbox" class="form-check-input" name="tallas_disponibles[]"
+                                                id="tallaS" value="S">
                                             <label class="form-check-label" for="tallaS">S</label>
                                         </div>
                                     </div>
                                     <div class="col-6 col-sm-4 col-md-2">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="tallas_disponibles[]" id="tallaM" value="M">
+                                            <input type="checkbox" class="form-check-input" name="tallas_disponibles[]"
+                                                id="tallaM" value="M">
                                             <label class="form-check-label" for="tallaM">M</label>
                                         </div>
                                     </div>
                                     <div class="col-6 col-sm-4 col-md-2">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="tallas_disponibles[]" id="tallaL" value="L">
+                                            <input type="checkbox" class="form-check-input" name="tallas_disponibles[]"
+                                                id="tallaL" value="L">
                                             <label class="form-check-label" for="tallaL">L</label>
                                         </div>
                                     </div>
                                     <div class="col-6 col-sm-4 col-md-2">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="tallas_disponibles[]" id="tallaXL" value="XL">
+                                            <input type="checkbox" class="form-check-input" name="tallas_disponibles[]"
+                                                id="tallaXL" value="XL">
                                             <label class="form-check-label" for="tallaXL">XL</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <button type="submit" class="btn btn-primary">Publicar</button>
                         </form>
                     </div>
@@ -127,10 +136,14 @@
     {{-- script para que aparezca el swit alert --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            let mensaje = '{{ session("success") }}';
-            let error = '{{ session("error") }}';
+            let mensaje = '{{ session('success') }}';
+            let error = '{{ session('error') }}';
+            let deleted = '{{ session('deleted') }}';
+            let errordeleted = '{{ session('errordeleted') }}';
+            let updateSuccess = '{{ session('updateSuccess') }}';
+            let updateError = '{{ session('updateError') }}';
 
-            if (mensaje){
+            if (mensaje) {
                 Swal.fire({
                     title: 'El producto Se a guardado con Éxito!',
                     text: mensaje,
@@ -139,7 +152,7 @@
                 });
             }
 
-            if (error){
+            if (error) {
                 Swal.fire({
                     title: 'A ocurrido un error!',
                     text: error,
@@ -148,7 +161,7 @@
                 });
             }
 
-            if (deleted){
+            if (deleted) {
                 Swal.fire({
                     title: 'Eliminación Exitosa!',
                     text: deleted,
@@ -158,7 +171,7 @@
                 });
             }
 
-            if (errordeleted){
+            if (errordeleted) {
                 Swal.fire({
                     title: 'A ocurrido un error!',
                     text: errordeleted,
@@ -167,7 +180,26 @@
                     timer: 1500
                 });
             }
+
+            if (updateSuccess) {
+                Swal.fire({
+                    title: 'Actualizacion Exitosa!',
+                    text: updateSuccess,
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+
+            if (updateError) {
+                Swal.fire({
+                    title: 'A ocurrido un error!',
+                    text: updateError,
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
         });
     </script>
 @endsection
-
