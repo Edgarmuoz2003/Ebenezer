@@ -7,7 +7,7 @@
     <div class="container">
         <!-- Button trigger modal -->
         <div class="d-flex justify-content-end mt-3">
-            <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Añadir Producto
             </button>
         </div>
@@ -17,7 +17,7 @@
                 @foreach ($productos as $producto)
                     <div class="col-md-3 mb-4">
                         <div class="card h-100">
-                             <img src="{{ Storage::url($producto->imagen) }}" class="card-img-top img-fluid imagen-producto"
+                            <img src="{{ Storage::url($producto->imagen) }}" class="card-img-top img-fluid imagen-producto"
                                 alt="{{ $producto->titulo }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $producto->titulo }}</h5>
@@ -55,26 +55,25 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="titulo" class="form-label">Título de la publicación</label>
-                                <input type="text" name="titulo" class="form-control" id="titulo">
+                                <input type="text" name="titulo" class="form-control" id="titulo" required>
                             </div>
                             <div class="mb-3">
                                 <label for="imagen" class="form-label">Cargar Imagen</label>
                                 <input type="file" name="imagen" class="form-control" id="imagen-producto"
-                                    accept="image/*">
+                                    accept="image/*" required>
                             </div>
                             <div class="mb-3">
                                 <label for="precio" class="form-label">Precio</label>
-                                <input type="number" name="precio" class="form-control" id="precio">
+                                <input type="number" name="precio" class="form-control" id="precio" required>
                             </div>
                             <div class="mb-3">
-                                <label for="descripcion" class="form-label">Descripcion</label>
-                                <textarea name="descripcion" class="form-control" id="Descripcion" cols="40" rows="5"></textarea>
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <textarea name="descripcion" class="form-control" id="Descripcion" cols="40" rows="5" required></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="categoria" class="form-label">Categoria</label>
-                                <select name="categoria" id="categoria" class="form-select"
-                                    aria-label="Default select example">
-                                    <option selected>Pijamas</option>
+                                <label for="categoria" class="form-label">Categoría</label>
+                                <select name="categoria" id="categoria" class="form-select" required>
+                                    <option value="Pijamas">Pijamas</option>
                                     <option value="Camisetas">Camisetas</option>
                                     <option value="Blusas">Blusas</option>
                                     <option value="Maquillaje">Maquillaje</option>
@@ -122,6 +121,16 @@
                                 </div>
                             </div>
 
+                            <div class="form-group form-check">
+                                <input class="form-check-input" type="checkbox" name="destacado" id="destacado" value="1">
+                                <label for="destacado" class="form-check-label">Marcar Como Destacado</label>
+                            </div>
+
+                            <div class="form-group form-check">
+                                <input class="form-check-input" type="checkbox" name="enOferta" id="enOferta" value="1">
+                                <label for="enOferta" class="form-check-label">Producto En Oferta</label>
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Publicar</button>
                         </form>
                     </div>
@@ -145,7 +154,7 @@
 
             if (mensaje) {
                 Swal.fire({
-                    title: 'El producto Se a guardado con Éxito!',
+                    title: 'El producto Se ha guardado con Éxito!',
                     text: mensaje,
                     icon: 'success',
                     confirmButtonText: 'Aceptar'
@@ -154,7 +163,7 @@
 
             if (error) {
                 Swal.fire({
-                    title: 'A ocurrido un error!',
+                    title: '¡Ha ocurrido un error!',
                     text: error,
                     icon: 'error',
                     confirmButtonText: 'Aceptar'
@@ -163,7 +172,7 @@
 
             if (deleted) {
                 Swal.fire({
-                    title: 'Eliminación Exitosa!',
+                    title: '¡Eliminación Exitosa!',
                     text: deleted,
                     icon: 'success',
                     showConfirmButton: false,
@@ -173,7 +182,7 @@
 
             if (errordeleted) {
                 Swal.fire({
-                    title: 'A ocurrido un error!',
+                    title: '¡Ha ocurrido un error!',
                     text: errordeleted,
                     icon: 'error',
                     showConfirmButton: false,
@@ -183,7 +192,7 @@
 
             if (updateSuccess) {
                 Swal.fire({
-                    title: 'Actualizacion Exitosa!',
+                    title: '¡Actualización Exitosa!',
                     text: updateSuccess,
                     icon: 'success',
                     showConfirmButton: false,
@@ -193,7 +202,7 @@
 
             if (updateError) {
                 Swal.fire({
-                    title: 'A ocurrido un error!',
+                    title: '¡Ha ocurrido un error!',
                     text: updateError,
                     icon: 'error',
                     showConfirmButton: false,

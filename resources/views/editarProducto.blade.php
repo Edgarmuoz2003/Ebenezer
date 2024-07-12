@@ -76,6 +76,21 @@
                     </div>
                 </div>
 
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="destacado" name="destacado" value="1" {{ $producto->destacado ? 'checked' : '' }}>
+                        <label class="form-check-label" for="destacado">Destacado</label>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="enOferta" name="enOferta" value="1" {{ $producto->enOferta ? 'checked' : '' }}>
+                        <label class="form-check-label" for="enOferta">En Oferta</label>
+                    </div>
+                </div>
+                
+
                 <div class="d-flex justify-content-between">
                     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                     <a href="{{ route('gestionProductos.index') }}" class="btn btn-secondary">Cancelar</a>
@@ -84,6 +99,34 @@
         </div>
     </div>
 </div>
+
+@if(session('updateSuccess'))
+    <div class="alert alert-success">
+        {{ session('updateSuccess') }}
+    </div>
+@endif
+
+@if(session('updateError'))
+    <div class="alert alert-danger">
+        {{ session('updateError') }}
+    </div>
+@endif
 @endsection
+
+
+<script>
+    let updateError = '{{ session('updateError') }}';
+
+
+    if (updateError) {
+                Swal.fire({
+                    title: '¡Ha ocurrido un error!',
+                    text: updateError,
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+</script>
 
 

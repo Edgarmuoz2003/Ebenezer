@@ -10,10 +10,11 @@ class Producto extends Model
     use HasFactory;
 
     protected $fillable = [
-        'titulo', 'imagen', 'precio', 'descripcion', 'categoria', 'tallas_disponibles'
+        'titulo', 'imagen', 'precio', 'descripcion', 'categoria', 'tallas_disponibles', 'destacado', 'enOferta'
     ];
 
     protected $casts = [
-        'tallas_disponibles' => 'json', 
+        'tallas_disponibles' => 'json',
     ];
 }
+

@@ -41,6 +41,8 @@ class ProductosController extends Controller
             'descripcion' => 'required|string',
             'categoria' => 'required|string',
             'tallas_disponibles' => 'required|array',
+            'destacado' => 'boolean',
+            'enOferta' => 'boolean',
         ]);
 
         try {
@@ -87,53 +89,69 @@ class ProductosController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-{
-    $request->validate([
-        'titulo' => 'required|string|max:50',
-        'precio' => 'required|integer',
-        'descripcion' => 'required|string',
-        'categoria' => 'required|string',
-        'tallas_disponibles' => 'required|array',
-    ]);
-
-    try {
-        $producto = Producto::findOrFail($id);
-
-        // Actualizar los campos del producto
-        $producto->titulo = $request->input('titulo');
-        $producto->precio = $request->input('precio');
-        $producto->descripcion = $request->input('descripcion');
-        $producto->categoria = $request->input('categoria');
-
-        // Manejar las tallas disponibles
-        $tallas_disponibles = $request->input('tallas_disponibles');
-        $producto->tallas_disponibles = $tallas_disponibles ?? [];
-
-        // Manejar la imagen si se proporciona
-        if ($request->hasFile('imagen')) {
-            // Eliminar la imagen anterior si existe
-            if ($producto->imagen) {
-                Storage::delete($producto->imagen);
+    {
+        Log::info('Iniciando actualización del producto');
+    
+        $request->validate([
+            'titulo' => 'required|string|max:50',
+            'precio' => 'required|integer',
+            'descripcion' => 'required|string',
+            'categoria' => 'required|string',
+            'tallas_disponibles' => 'required|array',
+            'destacado' => 'boolean',
+            'enOferta' => 'boolean',
+        ]);
+    
+        try {
+            Log::info('Validación completada');
+            
+            $producto = Producto::findOrFail($id);
+            Log::info('Producto encontrado', ['producto' => $producto]);
+    
+            // Actualizar los campos del producto
+            $producto->titulo = $request->input('titulo');
+            $producto->precio = $request->input('precio');
+            $producto->descripcion = $request->input('descripcion');
+            $producto->categoria = $request->input('categoria');
+    
+            // Manejar las tallas disponibles
+            $tallas_disponibles = $request->input('tallas_disponibles');
+            $producto->tallas_disponibles = $tallas_disponibles ?? [];
+            $producto->destacado = $request->boolean('destacado');
+            $producto->enOferta = $request->boolean('enOferta');
+            Log::info('Campos actualizados', ['producto' => $producto]);
+    
+            // Manejar la imagen si se proporciona
+            if ($request->hasFile('imagen')) {
+                Log::info('Imagen proporcionada');
+                
+                // Eliminar la imagen anterior si existe
+                if ($producto->imagen) {
+                    Storage::delete($producto->imagen);
+                    Log::info('Imagen anterior eliminada');
+                }
+    
+                // Almacenar la nueva imagen y guardar la ruta en la base de datos
+                $imagenPath = $request->file('imagen')->store('public/img');
+                $producto->imagen = $imagenPath;
+                Log::info('Nueva imagen almacenada', ['imagenPath' => $imagenPath]);
             }
-
-            // Almacenar la nueva imagen y guardar la ruta en la base de datos
-            $imagenPath = $request->file('imagen')->store('public/img');
-            $producto->imagen = $imagenPath;
+    
+            // Guardar el producto actualizado
+            $producto->save();
+            Log::info('Producto actualizado', ['producto' => $producto]);
+    
+            // Redirigir con un mensaje de éxito
+            return redirect()->route('gestionProductos.index')->with('updateSuccess', 'Producto actualizado correctamente');
+        } catch (\Throwable $th) {
+            Log::error("Error al intentar actualizar el producto: " . $th->getMessage());
+    
+            return redirect()->back()
+                ->withInput()
+                ->with('updateError', 'Ha ocurrido un error al actualizar el producto. Por favor, intenta nuevamente.');
         }
-
-        // Guardar el producto actualizado
-        $producto->save();
-
-        // Redirigir con un mensaje de éxito
-        return redirect()->route('gestionProductos.index')->with('updateSuccess', 'Producto actualizado correctamente');
-    } catch (\Throwable $th) {
-        Log::error("Error al intentar actualizar el producto: " . $th->getMessage());
-
-        return redirect()->back()
-            ->withInput()
-            ->with('updateError', 'Ha ocurrido un error al actualizar el producto. Por favor, intenta nuevamente.');
     }
-}
+    
 
 
 
