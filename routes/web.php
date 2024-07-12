@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\tiendaController;
 use App\Http\Controllers\nosotrosController;
 use App\Http\Controllers\contactenosController;
+use App\Http\Controllers\DestallesController;
 use App\Http\Controllers\ProductosController;
 
 // RUTAS GENERALES
@@ -12,6 +13,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/tienda', tiendaController::class)->name('tienda');
 Route::get('/nosotros', nosotrosController::class)->name('nosotros');
 Route::get('/contactenos', contactenosController::class)->name('contactenos');
+Route::get('/detalle/{id}', [DestallesController::class, 'show'])->name('ruta_detalles');
 
 Route::middleware([
     'auth:sanctum',

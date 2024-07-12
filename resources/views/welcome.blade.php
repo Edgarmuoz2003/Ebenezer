@@ -31,7 +31,10 @@
             <div class="slider">
                 @foreach ($productosRecientes as $product)
                     <div class="slider-item">
-                        <img src="{{ Storage::url($product->imagen) }}" alt="{{ $product->titulo }}">
+                        <a href="{{ route('ruta_detalles', $product->id) }}">
+                            <img src="{{ Storage::url($product->imagen) }}" alt="{{ $product->titulo }}">
+                        </a>
+                        
                         <div class="slider-caption">
                             <h5>{{ $product->titulo }}</h5>
                             <p>${{ number_format($product->precio, 0, ',', '.') }}</p>
@@ -41,7 +44,10 @@
                 <!-- Duplicar los elementos para crear un efecto de bucle infinito -->
                 @foreach ($productosRecientes as $product)
                     <div class="slider-item">
-                        <img src="{{ Storage::url($product->imagen) }}" alt="{{ $product->titulo }}">
+                        <a href="{{ route('ruta_detalles', $product->id) }}">
+                            <img src="{{ Storage::url($product->imagen) }}" alt="{{ $product->titulo }}">
+                        </a>
+                        
                         <div class="slider-caption">
                             <h5>{{ $product->titulo }}</h5>
                             <p>${{ number_format($product->precio, 0, ',', '.') }}</p>
@@ -61,7 +67,9 @@
     <div class="row">
         @foreach ($productosDestacados as $product)
             <div class="col-md-3">
-                <img src="{{ Storage::url($product->imagen) }}" class="img-fluid rounded" alt="{{ $product->titulo }}">
+                <a href="{{ route('ruta_detalles', $product->id) }}">
+                    <img src="{{ Storage::url($product->imagen) }}" class="img-fluid rounded" alt="{{ $product->titulo }}">
+                </a>
                 <h3 class="text-center">{{ $product->titulo }}</h3>
                 <p>${{ number_format($product->precio, 0, ',', '.') }}</p>
             </div>

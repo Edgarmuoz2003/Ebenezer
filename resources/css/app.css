@@ -218,6 +218,30 @@
     margin-top: 10px; /* Espacio entre el párrafo y el footer */
 }
 
+/* *************************Detalle Productos ********************     */
+.input-group {
+    display: flex;
+    max-width: 120px; /* Ajusta el ancho del input según sea necesario */
+}
+
+.input-group-sm .btn {
+    padding: 0.375rem 0.5rem; /* Ajusta el padding de los botones según sea necesario */
+}
+
+.imagen-producto img{
+    width: 250px;
+    height: 300px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+
+
+.datos-productos p{
+    font-size: 2rem;
+    color: #3b6e70;
+    font-weight: bold;
+}
 
 
 
