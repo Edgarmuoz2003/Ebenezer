@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         $productosRecientes = Producto::latest()->take(6)->get();
-        $productosDestacados = Producto::where('destacado', true)->take(4)->get();
+        $productosDestacados = Producto::where('destacado', true)->get();
         return view('welcome', compact('productosRecientes', 'productosDestacados'));
     }
 }

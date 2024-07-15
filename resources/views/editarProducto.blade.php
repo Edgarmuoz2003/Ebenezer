@@ -111,6 +111,8 @@
         {{ session('updateError') }}
     </div>
 @endif
+
+@include('layouts.botonsubir')
 @endsection
 
 

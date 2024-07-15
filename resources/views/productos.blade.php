@@ -211,4 +211,6 @@
             }
         });
     </script>
+
+@include('layouts.botonsubir')
 @endsection

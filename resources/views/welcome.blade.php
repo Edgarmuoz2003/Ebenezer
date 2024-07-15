@@ -111,5 +111,7 @@
     </div>
 </div>
 
+@include('layouts.botonsubir')
+
 
 @endsection
