@@ -23,8 +23,7 @@
     position: relative; /* Para alinear el número */
 }
 
-.navbar .fa-shopping-cart::after {
-    content: '3'; /* Número de elementos en el carrito */
+.navbar .fa-shopping-cart .cart-count {
     position: absolute;
     top: -8px; /* Ajusta la posición vertical */
     right: -8px; /* Ajusta la posición horizontal */

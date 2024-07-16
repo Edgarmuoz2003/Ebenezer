@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarritoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\tiendaController;
@@ -14,6 +15,9 @@ Route::get('/tienda', tiendaController::class)->name('tienda');
 Route::get('/nosotros', nosotrosController::class)->name('nosotros');
 Route::get('/contactenos', contactenosController::class)->name('contactenos');
 Route::get('/detalle/{id}', [DestallesController::class, 'show'])->name('ruta_detalles');
+Route::get('/carrito', [CarritoController::class, 'index'])->name('cart.index');
+Route::post('/carrito/{id}', [CarritoController::class, 'addToCart'])->name('cart.add');
+Route::delete('/carrito/{id}', [CarritoController::class, 'removeFromCart'])->name('cart.remove');
 
 Route::middleware([
     'auth:sanctum',

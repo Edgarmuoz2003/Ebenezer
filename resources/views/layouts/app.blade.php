@@ -104,7 +104,13 @@
                         </li>
                         @endauth
                     </ul>
-                    <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="{{ route('cart.index') }}">
+                        <i class="fas fa-shopping-cart">
+                            @if(session()->has('cartCount') && session('cartCount') > 0)
+                                <span class="cart-count">{{ session('cartCount') }}</span>
+                            @endif
+                        </i>
+                    </a>
                 </div>
             </div>
         </nav>
